@@ -5,9 +5,9 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Nav from "./Nav";
 import Home from "./Home";
 import Smurfs from "./Smurfs";
-// import SingleSmurf from "./SingleSmurf";
-// import AddSmurfForm from "./AddSmurfForm";
-// import UpdateSmurfForm from "./UpdateSmurfForm";
+import SingleSmurf from "./SingleSmurf";
+import AddSmurfForm from "./AddSmurfForm";
+import UpdateSmurfForm from "./UpdateSmurfForm";
 /*
  to wire this component up you're going to need a few things.
  I'll let you do this part on your own. 
@@ -22,6 +22,9 @@ class App extends Component {
           <Route path="/" component={Nav} />
           <Route exact path="/" component={Home} />
           <Route exact path="/smurfs" component={Smurfs} />
+          <Route exact path="/smurfs/:id" component={SingleSmurf} />
+          <Route exact path="/add-smurf" component={AddSmurfForm} />
+          <Route exact path="/smurfs/:id/update" component={UpdateSmurfForm} />
         </div>
       </Router>
     );
