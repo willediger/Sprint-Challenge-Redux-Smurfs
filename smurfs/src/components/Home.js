@@ -1,7 +1,7 @@
 import React from "react";
 
 import titleImg from "./smurfs-title-card.jpg";
-import "../App.css";
+import "./App.css";
 
 function Home(props) {
   const routeToList = event => {
