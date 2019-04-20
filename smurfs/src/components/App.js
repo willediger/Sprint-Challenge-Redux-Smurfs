@@ -1,5 +1,13 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+import Nav from "./Nav";
+import Home from "./Home";
+import Smurfs from "./Smurfs";
+// import SingleSmurf from "./SingleSmurf";
+// import AddSmurfForm from "./AddSmurfForm";
+// import UpdateSmurfForm from "./UpdateSmurfForm";
 /*
  to wire this component up you're going to need a few things.
  I'll let you do this part on your own. 
@@ -9,12 +17,13 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <h1>SMURFS! 2.0 W/ Redux</h1>
-        <div>Welcome to your Redux version of Smurfs!</div>
-        <div>Start inside of your `src/index.js` file!</div>
-        <div>Have fun!</div>
-      </div>
+      <Router>
+        <div>
+          <Route path="/" component={Nav} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/smurfs" component={Smurfs} />
+        </div>
+      </Router>
     );
   }
 }
