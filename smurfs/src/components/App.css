@@ -1,28 +1,113 @@
 .App {
   text-align: center;
+  margin-top: 10px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+a, a:visited, a:hover, a:active {
+  color: blue;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+a.active {
+  color: black;
+  text-decoration: none;
+  cursor: default;
 }
 
-.App-title {
-  font-size: 1.5em;
+.smurf-nav {
+  margin-left: 10px;
+  
+  display: flex;
+  width: 250px;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.App-intro {
-  font-size: large;
+.smurf-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.smurf-home img {
+  margin-bottom: 20px;
+}
+
+main {
+  width: 40%;
+  margin: 0 auto;
+}
+
+.smurfs a, a:visited, a:hover, a:active {
+  color: inherit;
+  text-decoration: none;
+}
+
+.smurf {
+  border: 1px solid black;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.smurf-info {
+  margin-left: 20px;
+}
+
+.smurf span {
+  width: 100px;
+}
+
+.smurf-container {  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.smurf-div {
+  
+  display: flex;
+  flex-direction: row;
+  border: 1px solid black;
+  width: 100%;
+  margin: 0;
+  align-items: flex-start;
+  margin-top: 20px;
+  padding: 8px;
+  padding-bottom: 5px;
+  padding-top: 7px;
+}
+
+.smurf-p {
+  
+  margin: 0;
+  padding: 0;
+  padding-bottom: 3px;
+}
+
+.delete-span {
+  
+  cursor: pointer;
+  border: 1px solid black;
+  padding: 5px 10px;
+}
+
+.smurf-buttons {
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+.edit-button {
+  width: 20px;
+  margin-top: 20px;
+  cursor: pointer;
+  border: 1px solid black;
+  padding: 5px 10px;
 }
