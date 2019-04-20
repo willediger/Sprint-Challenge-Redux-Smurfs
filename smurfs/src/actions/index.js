@@ -45,3 +45,33 @@ export const addSmurf = smurf => dispatch => {
       dispatch({ type: AT.ADDING_DATA_FAILURE, payload: err.response });
     });
 };
+
+export const deleteSmurf = id => dispatch => {
+  dispatch({ type: AT.DELETING_DATA_START });
+  return axios
+    .delete(`http://localhost:3333/smurfs/${id}`)
+    .then(res => {
+      dispatch({
+        type: AT.DELETING_DATA_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({ type: AT.DELETING_DATA_FAILURE, payload: err.response });
+    });
+};
+
+export const updateSmurf = (id, smurf) => dispatch => {
+  dispatch({ type: AT.UPDATING_DATA_START });
+  return axios
+    .put(`http://localhost:3333/smurfs/${id}`, smurf)
+    .then(res => {
+      dispatch({
+        type: AT.UPDATING_DATA_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({ type: AT.UPDATING_DATA_SUCCESS, payload: err.response });
+    });
+};
