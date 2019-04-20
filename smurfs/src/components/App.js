@@ -18,13 +18,19 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div className="App">
           <Route path="/" component={Nav} />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/smurfs" component={Smurfs} />
-          <Route exact path="/smurfs/:id" component={SingleSmurf} />
-          <Route exact path="/add-smurf" component={AddSmurfForm} />
-          <Route exact path="/smurfs/:id/update" component={UpdateSmurfForm} />
+          <main>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/smurfs" component={Smurfs} />
+            <Route exact path="/smurfs/:id" component={SingleSmurf} />
+            <Route exact path="/add-smurf" component={AddSmurfForm} />
+            <Route
+              exact
+              path="/smurfs/:id/update"
+              component={UpdateSmurfForm}
+            />
+          </main>
         </div>
       </Router>
     );
