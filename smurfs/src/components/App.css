@@ -1,6 +1,7 @@
 .App {
   text-align: center;
-  margin-top: 10px;
+  margin-top: 20px;
+  margin-bottom: 40px;
 }
 
 a, a:visited, a:hover, a:active {
@@ -14,7 +15,7 @@ a.active {
 }
 
 .smurf-nav {
-  margin-left: 10px;
+  margin-left: 20px;
   
   display: flex;
   width: 250px;
