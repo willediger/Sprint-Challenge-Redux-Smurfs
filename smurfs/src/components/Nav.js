@@ -1,20 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-import styled from "styled-components";
-import "../App.css";
+import "./App.css";
 
-const SmurfsNav = styled.nav`
-  display: flex;
-  width: 250px;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-function Nav() {
+const Nav = () => {
   return (
     <nav>
-      <SmurfsNav className="smurf-nav">
+      <div className="smurf-nav">
         <NavLink exact to="/">
           Home
         </NavLink>
@@ -24,9 +16,9 @@ function Nav() {
         <NavLink exact to="/add-smurf">
           Add Smurf
         </NavLink>
-      </SmurfsNav>
+      </div>
     </nav>
   );
-}
+};
 
 export default Nav;
