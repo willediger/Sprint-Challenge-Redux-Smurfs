@@ -1,7 +1,11 @@
 import React from "react";
-import axios from "axios";
 
-export default class UpdateSmurfForm extends React.Component {
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+
+import { updateSmurf } from "../actions/index";
+
+class UpdateSmurfForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -31,16 +35,9 @@ export default class UpdateSmurfForm extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    axios
-      .put(
-        `http://localhost:3333/smurfs/${this.props.match.params.id}`,
-        this.state.smurf
-      )
-      .then(response => {
-        this.props.updateSmurfs(response.data);
-        this.props.history.push(`/smurfs`);
-      })
-      .catch(err => console.log(err));
+    this.props
+      .updateSmurf(this.props.match.params.id, this.state.smurf)
+      .then(() => this.props.history.push("/smurfs"));
   };
 
   render() {
@@ -78,8 +75,24 @@ export default class UpdateSmurfForm extends React.Component {
         </form>
       </div>
     ) : (
-      "Loading Smurfs"
+      "Loading Smurf"
     );
     return <div>{rendered}</div>;
   }
 }
+
+const mapStateToProps = state => ({
+  smurfs: state.smurfs,
+  fetchingSmurfs: state.fetchingSmurfs
+});
+
+const mapDispatchToProps = dispatch => ({
+  updateSmurf: (id, smurf) => dispatch(updateSmurf(id, smurf))
+});
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(UpdateSmurfForm)
+);
