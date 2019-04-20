@@ -1,74 +1,21 @@
 import React from "react";
 
-import styled from "styled-components";
-import axios from "axios";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import pencil from "./pencil.png";
-import "../App.css";
-const images = require.context("./smurf-imgs", true);
+import "./App.css";
 
-const SmurfContainerDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const SmurfDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  border: 1px solid black;
-  width: 100%;
-  margin: 0;
-  align-items: flex-start;
-  margin-top: 20px;
-  padding: 8px;
-  padding-bottom: 5px;
-  padding-top: 7px;
-`;
-
-const P = styled.p`
-  margin: 0;
-  padding: 0;
-  padding-bottom: 3px;
-`;
-
-const DeleteSpan = styled.span`
-  cursor: pointer;
-  border: 1px solid black;
-  padding: 5px 10px;
-`;
-
-const SmurfButtons = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
-  margin-right: 20px;
-`;
-
-const EditButton = styled.img`
-  width: 20px;
-  margin-top: 20px;
-  cursor: pointer;
-  border: 1px solid black;
-  padding: 5px 10px;
-`;
+import { deleteSmurf } from "../actions/index";
 
 const SingleSmurf = props => {
   const deleteSmurf = event => {
-    console.log("Smurf is being deleted");
-    axios
-      .delete(`http://localhost:3333/smurfs/${smurf.id}`)
-      .then(response => {
-        props.updateSmurfs(response.data);
-        props.history.push("/smurfs");
-      })
-      .catch(err => console.log(err));
+    event.preventDefault();
+    props.deleteSmurf(smurf.id).then(() => props.history.push("/smurfs"));
   };
 
   const updateSmurf = event => {
-    console.log("Smurf is being updated");
+    event.preventDefault();
     props.history.push(`/smurfs/${smurf.id}/update`);
   };
 
@@ -81,34 +28,43 @@ const SingleSmurf = props => {
     return <h2>Loading smurf data...</h2>;
   }
 
-  let img;
-  try {
-    img = images(`./${props.smurfImgFilename(smurf.name)}`);
-  } catch (err) {
-    img = null;
-  }
-  let imgComponent = img ? (
-    <img src={img} alt={smurf.name} height="100px" />
-  ) : (
-    <span>No image for this smurf</span>
-  );
   return (
-    <SmurfContainerDiv>
-      <SmurfButtons>
-        <DeleteSpan onClick={deleteSmurf}>X</DeleteSpan>
-        <EditButton onClick={updateSmurf} src={pencil} alt="edit" />
-      </SmurfButtons>
+    <div className="smurf-container">
+      <div className="smurf-buttons">
+        <span className="delete-span" onClick={deleteSmurf}>
+          X
+        </span>
+        <img
+          className="edit-button"
+          onClick={updateSmurf}
+          src={pencil}
+          alt="edit"
+        />
+      </div>
 
-      <SmurfDiv className="smurf">
-        {imgComponent}
+      <div className="smurf smurf-div">
         <div className="smurf-info">
-          <P>Name: {smurf.name}</P>
-          <P>Age: {smurf.age}</P>
-          <P>Height: {smurf.height}</P>
+          <p className="smurf-p">Name: {smurf.name}</p>
+          <p className="smurf-p">Age: {smurf.age}</p>
+          <p className="smurf-p">Height: {smurf.height}</p>
         </div>
-      </SmurfDiv>
-    </SmurfContainerDiv>
+      </div>
+    </div>
   );
 };
 
-export default SingleSmurf;
+const mapStateToProps = state => ({
+  smurfs: state.smurfs,
+  fetchingSmurfs: state.fetchingSmurfs
+});
+
+const mapDispatchToProps = dispatch => ({
+  deleteSmurf: id => dispatch(deleteSmurf(id))
+});
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SingleSmurf)
+);
