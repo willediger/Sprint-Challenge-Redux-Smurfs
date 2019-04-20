@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
-import axios from "axios";
+import { addSmurf } from "../actions";
 
-export default class AddSmurfForm extends Component {
+class AddSmurfForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,21 +16,9 @@ export default class AddSmurfForm extends Component {
 
   addSmurf = event => {
     event.preventDefault();
-    // add code to create the smurf using the api
-    axios
-      .post("http://localhost:3333/smurfs", this.state)
-      .then(response => {
-        this.props.updateSmurfs(response.data);
-        this.props.history.push("/smurfs");
-      })
-      .then(() => {
-        this.setState({
-          name: "",
-          age: "",
-          height: ""
-        });
-      })
-      .catch(err => console.log(err));
+    this.props
+      .addSmurf(this.state)
+      .then(() => this.props.history.push("/smurfs"));
   };
 
   handleInputChange = e => {
@@ -63,3 +53,14 @@ export default class AddSmurfForm extends Component {
     );
   }
 }
+
+const mapStateToProps = ({ addingSmurf }) => ({
+  addingSmurf
+});
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { addSmurf }
+  )(AddSmurfForm)
+);
